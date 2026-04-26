@@ -44,14 +44,18 @@ const equalizer = document.getElementById('equalizer');
 // 1. Intro Animation Logic
 // ==========================================
 window.addEventListener('load', () => {
-    // Hide intro after 3 seconds
+    // Start intro animations
+    introScreen.classList.add('split');
+
+    // Show player slightly before the doors fully open
     setTimeout(() => {
-        introScreen.classList.add('fade-out');
-        // Show player slightly after fade starts
-        setTimeout(() => {
-            playerContainer.classList.remove('hidden');
-        }, 500);
-    }, 3000);
+        playerContainer.classList.remove('hidden');
+    }, 2800);
+
+    // completely hide intro container later
+    setTimeout(() => {
+        introScreen.style.display = 'none';
+    }, 4000);
 });
 
 // ==========================================
@@ -167,7 +171,7 @@ function updateUI() {
     setTimeout(() => {
         const thumbnailUrl = `https://img.youtube.com/vi/${track.id}/hqdefault.jpg`;
         coverArt.src = thumbnailUrl;
-        backgroundContainer.style.backgroundImage = `url('${thumbnailUrl}')`;
+        // Background image update removed in favor of animated glowing orbs
         trackTitle.textContent = track.title;
         trackArtist.textContent = track.artist;
 
