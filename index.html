@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Music Player</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Intro Screen -->
+    <div id="intro-screen" class="intro-screen">
+        <h1 class="intro-text">By Rafi Andika</h1>
+    </div>
+
+    <!-- Background Blur Container -->
+    <div class="background-container" id="background-container"></div>
+    <div class="background-overlay"></div> <!-- For dimming -->
+
+    <!-- Main Player UI -->
+    <div class="player-container hidden" id="player-container">
+
+        <!-- Cover Art Section -->
+        <div class="cover-section">
+            <img id="cover-art" src="" alt="Album Cover" class="cover-art">
+        </div>
+
+        <!-- Track Info Section -->
+        <div class="track-info">
+            <div class="text-info">
+                <h2 id="track-title" class="track-title">Loading...</h2>
+                <p id="track-artist" class="track-artist">-</p>
+            </div>
+            <!-- Equalizer -->
+            <div class="equalizer" id="equalizer">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+
+        <!-- Progress Bar Section -->
+        <div class="progress-section">
+            <span id="current-time" class="time">0:00</span>
+            <input type="range" id="progress-bar" class="progress-bar" value="0" min="0" max="100" step="0.1">
+            <span id="duration-time" class="time">0:00</span>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls-section">
+            <button class="control-btn" id="prev-btn" title="Previous">
+                <i class="ph-fill ph-skip-back"></i>
+            </button>
+            <button class="control-btn play-pause-btn" id="play-pause-btn" title="Play">
+                <i class="ph-fill ph-play" id="play-icon"></i>
+            </button>
+            <button class="control-btn" id="next-btn" title="Next">
+                <i class="ph-fill ph-skip-forward"></i>
+            </button>
+        </div>
+
+        <!-- Volume Section -->
+        <div class="volume-section">
+            <i class="ph ph-speaker-high" id="volume-icon"></i>
+            <input type="range" id="volume-bar" class="volume-bar" value="100" min="0" max="100" step="1">
+        </div>
+
+    </div>
+
+    <!-- Hidden YouTube Player -->
+    <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px;"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
