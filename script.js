@@ -37,7 +37,7 @@ About you
 Do you think I have forgotten about you?`
     },
     {
-        id: 'jfKfPfyJRdk', // Fallback ID for audio
+        id: 'V6cQ4LyvOgg', // Ghea Indrawari - 1000x
         title: '1000x',
         artist: 'Ghea Indrawari',
         lyrics: `Kadang aku iri melihat mereka
