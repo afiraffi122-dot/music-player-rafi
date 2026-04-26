@@ -3,12 +3,89 @@ const playlist = [
     {
         id: '4PgOJwUCdIc', // The 1975 - About You (Audio)
         title: 'About You',
-        artist: 'The 1975'
+        artist: 'The 1975',
+        lyrics: `I know a place
+It's somewhere I go when I need to remember your face
+We get married in our heads
+Something to do whilst we try to recall how we met
+
+Do you think I have forgotten?
+Do you think I have forgotten?
+Do you think I have forgotten about you?
+
+You and I
+Were alive
+With nothing to do I could lay and just look in your eyes
+Wait and pretend
+Hold on and hope that we'll find our way back in the end Do you think I have forgotten?
+Do you think I have forgotten?
+Do you think I have forgotten about you?
+Do you think I have forgotten?
+Do you think I have forgotten?
+Do you think I have forgotten about you?
+
+There was something about you that now I can't remember
+It's the same damn thing that made my heart surrender
+And I'll miss you on a train
+I'll miss you in the morning
+I never know what to think about, so think about you
+(I think about you)
+About you
+Do you think I have forgotten about you?
+About you
+About you
+Do you think I have forgotten about you?`
     },
     {
-        id: 'jfKfPfyJRdk',
-        title: 'lofi hip hop radio - beats to relax/study to',
-        artist: 'Lofi Girl'
+        id: 'jfKfPfyJRdk', // Fallback ID for audio
+        title: '1000x',
+        artist: 'Ghea Indrawari',
+        lyrics: `Kadang aku iri melihat mereka
+Tercipta seperti pasangan yang sempurna
+Saling mencintai dan begitu bahagia
+Dan dipuja puji insan yang memandangnya
+
+Lalu aku memandangmu dan tersadar
+Betapa beruntungnya
+Ada cinta seperti cintamu kepadaku
+Hoo
+
+Cukup aku milikmu dan kamu milikku
+Tetap di sampingku sampai jadi debu
+Sampai akhir waktu sampai maut yang bersaksi
+Cintaku abadi
+
+Dan bila aku terlahir seribu kali lagi
+Di dunia yang lain aku tak peduli
+Kau akan kucari sampai kau tau betapa
+Kau kucintai
+
+Lalu aku memandangmu dan tersadar
+Betapa beruntungnya
+Ada cinta seperti cintamu kepadaku hoo
+
+Cukup aku milikmu dan kamu milikku
+Tetap di sampingku sampai jadi debu
+Sampai akhir waktu sampai maut yang bersaksi
+Cintaku abadi
+
+Dan bila aku terlahir seribu kali lagi
+Di dunia yang lain aku tak peduli
+Kau akan kucari sampai kau tau betapa
+Kau kucintai
+Yeee
+
+Seribu kali lagi kau kan kucintai (kau kan kucintai)
+Cukup aku milikmu kau milikku (tetap disampingku)
+Sampai jadi debu sampai akhir waktu
+Hooo kau tetap milikku
+
+Detak di jantungku cintaku abadi
+Seribu kali lagi aku tak peduli
+Sampai kau tau betapa kau kucintai
+Hiii
+Kau akan kucari
+Sampai kau tau betapa kau kucintai`
     },
     {
         id: '5yx6BWlEVcY',
@@ -39,6 +116,9 @@ const durationTimeEl = document.getElementById('duration-time');
 const volumeBar = document.getElementById('volume-bar');
 const volumeIcon = document.getElementById('volume-icon');
 const equalizer = document.getElementById('equalizer');
+const lyricsBtn = document.getElementById('lyrics-btn');
+const lyricsOverlay = document.getElementById('lyrics-overlay');
+const lyricsText = document.getElementById('lyrics-text');
 
 // ==========================================
 // 1. Intro Animation Logic
@@ -175,6 +255,9 @@ function updateUI() {
         trackTitle.textContent = track.title;
         trackArtist.textContent = track.artist;
 
+        // Update lyrics
+        lyricsText.textContent = track.lyrics || "Lyrics not available for this track.";
+
         coverArt.style.opacity = 1;
     }, 250); // wait halfway through transition
 }
@@ -267,3 +350,14 @@ volumeBar.style.setProperty('--volume', '100%');
 playPauseBtn.addEventListener('click', togglePlay);
 prevBtn.addEventListener('click', prevTrack);
 nextBtn.addEventListener('click', nextTrack);
+
+lyricsBtn.addEventListener('click', () => {
+    lyricsOverlay.classList.toggle('hidden');
+    if (lyricsOverlay.classList.contains('hidden')) {
+        lyricsBtn.style.color = 'var(--text-primary)';
+        lyricsBtn.style.textShadow = 'none';
+    } else {
+        lyricsBtn.style.color = 'var(--accent)';
+        lyricsBtn.style.textShadow = '0 0 15px var(--accent-glow)';
+    }
+});
