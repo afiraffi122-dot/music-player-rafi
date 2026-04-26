@@ -38,80 +38,132 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #000;
+    z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
-    transition: opacity 1s ease, visibility 1s ease;
+    overflow: hidden;
+    pointer-events: none;
 }
 
-.intro-screen.fade-out {
+.intro-bg-split {
+    position: absolute;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background-color: #050505;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1) 2.5s;
+}
+
+.intro-bg-split.left {
+    left: 0;
+}
+
+.intro-bg-split.right {
+    right: 0;
+}
+
+.intro-screen.split .intro-bg-split.left {
+    transform: translateX(-100%);
+}
+
+.intro-screen.split .intro-bg-split.right {
+    transform: translateX(100%);
+}
+
+.intro-content {
+    position: relative;
+    z-index: 101;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 1;
+    transition: opacity 0.5s ease 2s, transform 0.5s ease 2s;
+}
+
+.intro-screen.split .intro-content {
     opacity: 0;
-    visibility: hidden;
+    transform: scale(1.1);
+}
+
+.intro-logo {
+    font-size: 3rem;
+    color: var(--accent);
+    animation: floatLogo 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 15px var(--accent-glow));
 }
 
 .intro-text {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 2.8rem;
+    font-weight: 800;
     letter-spacing: 2px;
-    animation: introAnim 3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     background: linear-gradient(90deg, #fff, #b3b3b3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    animation: textReveal 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
-@keyframes introAnim {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-        text-shadow: 0 0 0 rgba(255, 255, 255, 0);
-    }
+.intro-subtext {
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.8s;
+}
 
-    30% {
-        opacity: 1;
-        transform: scale(1.05);
-        text-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
-    }
+@keyframes floatLogo {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
 
-    70% {
-        opacity: 1;
-        transform: scale(1);
-        text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-    }
+@keyframes textReveal {
+    100% { opacity: 1; transform: translateY(0); }
+}
 
-    100% {
-        opacity: 0;
-        transform: scale(1.1);
-    }
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 /* =========================================
-   Background Effects
+   Animated Glowing Orbs Background
 ========================================= */
-.background-container {
+.animated-bg {
     position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background-size: cover;
-    background-position: center;
-    filter: blur(40px) saturate(1.5);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050505;
+    overflow: hidden;
     z-index: 1;
-    animation: bgZoom 30s linear infinite alternate;
-    transition: background-image 1s ease-in-out;
 }
 
-@keyframes bgZoom {
-    0% {
-        transform: scale(1);
-    }
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: orbFloat 25s infinite ease-in-out alternate;
+}
 
-    100% {
-        transform: scale(1.15);
-    }
+.orb-1 { width: 50vw; height: 50vw; background: #1db954; top: -10%; left: -10%; animation-delay: 0s; }
+.orb-2 { width: 60vw; height: 60vw; background: #8a2be2; bottom: -20%; right: -10%; animation-delay: -5s; }
+.orb-3 { width: 40vw; height: 40vw; background: #00d2ff; top: 40%; left: 30%; animation-delay: -10s; }
+.orb-4 { width: 45vw; height: 45vw; background: #ff0055; bottom: 10%; left: -20%; animation-delay: -15s; }
+
+@keyframes orbFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(10vw, 15vh) scale(1.1); }
+    66% { transform: translate(-10vw, -10vh) scale(0.9); }
+    100% { transform: translate(15vw, -15vh) scale(1.05); }
 }
 
 .background-overlay {
@@ -120,7 +172,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
+    background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
     z-index: 2;
 }
 
